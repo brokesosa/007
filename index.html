@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SÉCURITÉ NATIONALE | TERMINAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-emerald-500 font-mono min-h-screen p-5 md:p-12">
+
+    <div class="max-w-6xl mx-auto border border-emerald-900 p-8 shadow-[0_0_30px_rgba(16,185,129,0.05)] bg-zinc-950/50">
+        
+        <header class="flex justify-between items-end border-b border-emerald-900 pb-6 mb-10">
+            <div>
+                <h1 class="text-3xl font-black tracking-tighter uppercase italic">Intelligence <span class="text-white">007</span> Terminal</h1>
+                <p class="text-[10px] text-emerald-700 uppercase tracking-[0.4em] mt-2">Accès restreint</p>
+            </div>
+            <div class="hidden md:block text-right text-[10px] text-emerald-800 leading-relaxed">
+                STATUS: EN LIGNE<br>
+                CRYPTO_ENGINE: v2.0.4<br>
+                SYNC: ACTIVE
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-emerald-900 rounded-sm overflow-hidden">
+            
+            <section class="p-6 border-b lg:border-b-0 lg:border-r border-emerald-900 bg-black/40">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="px-2 py-1 bg-emerald-900 text-emerald-300 text-[10px] font-bold uppercase">Source : Texte Clair</span>
+                </div>
+
+                <textarea 
+                    id="user-message"
+                    class="w-full bg-transparent p-0 text-lg text-white placeholder:text-emerald-900 outline-none h-48 resize-none" 
+                    placeholder="Entrez le message à traiter..."></textarea>
+
+                <div class="flex gap-2 mt-4">
+                    <button id="btn-chiffrer" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-black font-black py-2 text-xs uppercase tracking-widest transition-all">
+                        Chiffrer
+                    </button>
+                    <button id="btn-dechiffrer" class="flex-1 border border-emerald-600 text-emerald-500 hover:bg-emerald-900 py-2 text-xs uppercase tracking-widest transition-all">
+                        Déchiffrer
+                    </button>
+                    <button id="toggleblog" class="flex-1 border border-yellow-500 text-yellow-500 text-[10px] uppercase hover:bg-yellow-500 hover:text-black transition-all">
+                        Ouvrir le rapport
+                    </button>
+                </div>
+                
+            </section>
+
+            <section class="p-6 bg-emerald-950/5">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="px-2 py-1 bg-zinc-800 text-emerald-400 text-[10px] font-bold uppercase">Résultat : Cryptogramme</span>
+                </div>
+
+                <div id="output-stream" class="w-full text-lg text-emerald-400 h-48 break-all overflow-y-auto italic">
+                    <span class="opacity-30">En attente d'exécution...</span>
+                </div>
+                
+                <div class="mt-4 flex justify-end">
+                    <button onclick="navigator.clipboard.writeText(document.getElementById('output-stream').innerText)" class="text-[10px] text-emerald-700 hover:text-emerald-400 uppercase underline tracking-tighter">
+                        Copier le résultat
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <section class="mt-12 space-y-4">
+            <div class="flex items-center gap-4">
+                <span class="px-2 py-1 bg-red-900 text-red-300 text-xs font-bold uppercase">Analyse Interceptée</span>
+                <div class="h-[1px] flex-1 bg-red-900/30"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 bg-black border border-red-900/30 p-4">
+                     <p class="text-red-700 text-[10px] font-bold uppercase mb-2">Dernier signal capté :</p>
+                     <p id="code" class="text-red-500 text-sm tracking-widest font-bold">QJ HTIJ XJHWJY JXY HFMJ IFSX QJ KNHMNJW OFAFXHWNUY</p>
+                </div>
+                <div id="output2" class="md:col-span-2 bg-black border border-red-900/30 p-4">
+                    <p class="text-red-700 text-[10px] font-bold uppercase mb-2">Résultat :</p>
+                    <p class="text-red-500 text-sm tracking-widest font-bold">En attente d'exécution...</p>
+               </div>
+                <button id="brute" class="md:col-span-2 md:row-span-4 border-red-600 text-red-500 hover:bg-red-600 hover:text-black text-xs font-black uppercase transition-all px-4">
+                    Attaque Force Brute
+                </button>
+            </div>
+        </section>
+        <div id="blog-section" class="hidden mt-10 border-t border-emerald-900 pt-8">
+            <h2 class="text-xl font-bold mb-6 text-white uppercase tracking-widest border-l-4 border-emerald-600 pl-3">Archives de Mission - Agent 007</h2>
+            
+            <div class="space-y-6">
+                <article class="bg-emerald-950/10 p-4 border border-emerald-900/30">
+                    <p class="text-[9px] text-emerald-700 mb-1">DATE: 27/03/2026 | OBJET: OPÉRATION BIFID</p>
+                    <h3 class="text-emerald-400 font-bold uppercase mb-2">Comprendre le chiffrement par grille</h3>
+                    <p class="text-xs text-emerald-600 leading-relaxed">
+De base, le Bifide ça tourne sur une grille de 5x5. Le souci, c’est que 5×5=25, et comme on a 26 lettres dans l'alphabet, on est obligé de tricher en mettant le I et le J dans la même case.
+
+Pour coder un mot comme LIT, je commence par repérer les coordonnées de chaque lettre dans la grille. Je note toutes les lignes d'un côté et toutes les colonnes de l'autre. Ça me fait deux suites de chiffres. Ensuite, je colle la suite des colonnes juste après la suite des lignes pour créer un seul long ruban.
+
+Pour finir, je recoupe ce ruban par paires de deux chiffres. Chaque paire me donne les coordonnées d'une nouvelle lettre dans ma grille de 5x5. C'est comme ça que le message devient illisible, parce que les lignes et les colonnes se mélangent complètement. L'avantage de ma version en 6x6, c'est que je n'ai pas besoin de sacrifier le J et que je peux rajouter les chiffres et l'espace.
+                    </p>
+                </article>
+            </div>
+        </div>
+        <footer class="mt-12 pt-6 border-t border-emerald-900 flex justify-between items-center">
+            <div class="text-[9px] text-emerald-900 uppercase tracking-widest">
+                Propriété de l'agence — Tracé IP actif
+            </div>
+            <div class="flex gap-2">
+                <div class="h-1.5 w-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                <div class="h-1.5 w-1.5 bg-emerald-800 rounded-full"></div>
+            </div>
+        </footer>
+    </div>
+    <script src="/src/main.js"></script>
+    <script src="/src/script.js"></script>
+    <script src="/src/explication.js"></script>
+</body>
+</html>
