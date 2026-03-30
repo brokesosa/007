@@ -1,28 +1,47 @@
-name: NodeJS with Webpack
+name: NodeJS with Webpack (Vite Deploy)
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master" ] # Vérifie bien que ta branche s'appelle master et pas main
   pull_request:
     branches: [ "master" ]
+
+# Ces permissions sont OBLIGATOIRES pour que l'action puisse publier le site
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20.x, 22.x]
-
     steps:
     - uses: actions/checkout@v4
-
-    - name: Use Node.js ${{ matrix.node-version }}
+    
+    - name: Use Node.js 20
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 20
+        cache: 'npm'
 
-    - name: Build
+    - name: Install and Build
       run: |
         npm install
         npm run build
+
+    # Cette étape "emballe" ton site pour GitHub Pages
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './dist'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
