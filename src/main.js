@@ -33,10 +33,10 @@ btn.addEventListener('click', () => {
           const CL = ligne + colonne;
           let resultat = "";
           for (let i= 0; i < CL.length;i+=2) {
-              Lnew = parseInt(CL[i]);
-              Cnew = parseInt(CL [i+1]);
-              index = (Lnew-1)*6+(Cnew-1);
-              lettreChiffrée = alpha[index];
+              let Lnew = parseInt(CL[i]);
+              let Cnew = parseInt(CL [i+1]);
+              let index = (Lnew-1)*6+(Cnew-1);
+              let lettreChiffrée = alpha[index];
               resultat += lettreChiffrée;
           }
           const afficheur = document.querySelector('#output-stream');
